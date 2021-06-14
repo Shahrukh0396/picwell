@@ -21,28 +21,42 @@ const SearchBar = (props) => {
       dispatch(StockData(data))
       props.getData(data)
     } catch (err) {
-      if(err.message == "Request failed with status code 404") {
-        props.getData({error: "Request failed with status code 404"})
+      if (err.message == "Request failed with status code 404") {
+        props.getData({ error: "Request failed with status code 404" })
       }
     }
   }
 
   return (
-    <form action="/" method="get">
-      <label htmlFor="header-search">
-        <span className="visually-hidden">Search blog posts</span>
-      </label>
-      <input
-        style={{ height: 40, width: 150, borderRadius: 30, borderColor: 'lightgray' }}
-        type="text"
-        id="header-search"
-        placeholder="Stock Ticker"
-        name="s"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-      />
-      <button onClick={search} style={{ height: 40, width: 100, borderRadius: 40, backgroundColor: 'black', color: 'white', marginLeft: 10 }} type="submit">SEARCH</button>
-    </form>
+    <>
+      <div className="container-fluid">
+        <div className="row mt-5">
+          <div className="col-xl-12 d-flex" style={{ justifyContent: 'center' }}>
+            <form action="/" method="get">
+              <label htmlFor="header-search">
+                <span className="visually-hidden">Search blog posts</span>
+              </label>
+              <div className="row">
+                <div className="col-6 d-flex" style={{justifyContent: 'center'}}>
+                  <input
+                    style={{ outline: 'none', borderRadius: '50px', borderColor: '', height: '50px', width: '200px', padding: '10px', borderStyle: 'solid' }}
+                    type="text"
+                    id="header-search"
+                    placeholder="Stock Ticker"
+                    name="s"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                  />
+                </div>
+                <div className="col-2">
+                  <button onClick={search} style={{ height: 50, width: 120, borderRadius: 40, backgroundColor: 'black', color: 'white', marginLeft: 10, border: 'none' }} type="submit">SEARCH</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
   )
 };
 

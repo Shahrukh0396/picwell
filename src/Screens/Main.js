@@ -20,24 +20,36 @@ const Main = () => {
   const [data, setData] = useState({})
 
   return (
-    <HashRouter>
-      { Object.keys(data).length > 1 ?
-        <div>
-          <SearchBar getData={setData} />
-          <CardData data={data} />
+    <>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style={{ justifyContent: 'center' }}>
+            <HashRouter>
+              {Object.keys(data).length > 1 ?
+                <div>
+                  <SearchBar getData={setData} />
+                  <CardData data={data} />
+                </div>
+                : Object.keys(data).length > 0 && data.error ?
+                  <div className="row">
+                    <div className="col" style={{justifyContent: ''}}>
+                      <SearchBar getData={setData} />
+                      <p className="mr-5" style={{ color: 'grey', marginTop: '50px', textAlign: 'center' }}>Invalid ticker symbol</p>
+                    </div>
+                  </div>
+                  :
+                  <div className="row">
+                    <div className="col" style={{}}>
+                      <SearchBar getData={setData} />
+                      <p className="mr-5" style={{ color: 'grey', marginTop: '50px', textAlign: 'center', }}>Search stock by ticker symbol</p>
+                    </div>
+                  </div>
+              }
+            </HashRouter>
+          </div>
         </div>
-        : Object.keys(data).length > 0 && data.error ?
-          <div>
-            <SearchBar getData={setData} />
-            <p style={{ color: 'grey' }}>Invalid ticker symbol</p>
-          </div>
-          :
-          <div>
-            <SearchBar getData={setData} />
-            <p style={{ color: 'grey' }}>Search stock by ticker symbol</p>
-          </div>
-      }
-    </HashRouter>
+      </div>
+    </>
   );
 }
 
